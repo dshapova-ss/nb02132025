@@ -41,12 +41,12 @@ jobs:
       shell: bash
       run: python3 script.py "$(pwd)/test_folder" "json" 6
 
-    - name: Show folder content before script run
+    - name: Show folder content after script run(linux/macos)
       if: matrix.os != 'windows-latest'
       shell: bash
       run: ls -la test_folder
 
-    - name: Show folder content before script run
+    - name: Show folder content after script run(windows)
       if: matrix.os == 'windows-latest'
       shell: bash
       run: dir test_folder
