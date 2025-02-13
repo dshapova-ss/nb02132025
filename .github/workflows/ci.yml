@@ -1,0 +1,40 @@
+name: Integration
+
+on: [push]
+
+jobs:
+  test-script:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Create test folder and add files
+      shell: bash
+      run: |
+        mkdir test_folder
+        # Create JSON files to be renamed
+        for i in {1..5}; do
+          echo "Sample content for file $i" > test_folder/file$i.json
+        done
+        # Create unaffected files (txt, pdf)
+        for i in {1..3}; do
+          echo "This is a text file $i" > test_folder/file$i.txt
+          echo "This is a PDF file $i" > test_folder/file$i.pdf
+        done
+
+    - name: Show folder content before script run
+      shell: bash
+      run: ls -l test_folder
+
+    - name: Run Python script
+      shell: bash
+      run: python3 script.py "$(pwd)/test_folder" "json" 6
+
+    - name: Show folder content after script run
+      shell: bash
+      run: ls -l test_folder
