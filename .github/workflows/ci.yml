@@ -19,7 +19,7 @@ jobs:
         mkdir test_folder
         # Create JSON files to be renamed
         for i in {1..5}; do
-          echo "Sample content for file $i" > test_folder/filefilefilefiledrxfctgvhbjnkml$i.json
+          echo "Sample content for file $i" > test_folder/file$i$i$i$i$i$i$i$i$i$i$i$i$i$i$i$i$i$i.json
         done
         # Create unaffected files (txt, pdf)
         for i in {1..3}; do
