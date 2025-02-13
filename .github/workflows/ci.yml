@@ -28,13 +28,25 @@ jobs:
         done
 
     - name: Show folder content before script run
+      if: matrix.os != 'windows-latest'
       shell: bash
       run: ls -la test_folder
+
+    - name: Show folder content before script run
+      if: matrix.os == 'windows-latest'
+      shell: bash
+      run: dir /a /o /q test_folder
 
     - name: Run Python script
       shell: bash
       run: python3 script.py "$(pwd)/test_folder" "json" 6
 
-    - name: Show folder content after script run
+    - name: Show folder content before script run
+      if: matrix.os != 'windows-latest'
       shell: bash
       run: ls -la test_folder
+
+    - name: Show folder content before script run
+      if: matrix.os == 'windows-latest'
+      shell: bash
+      run: dir /a /o /q test_folder
